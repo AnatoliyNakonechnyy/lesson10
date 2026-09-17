@@ -1,0 +1,44 @@
+# Байт-код и кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Виртуальные окружения
+venv/
+ENV/
+env/
+.env
+.venv
+
+# Настройки среды и секреты
+.env.local
+.env.*.local
+
+# Артефакты сборки и дистрибутива
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Настройки редакторов и IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Логи и ОС
+*.log
+.DS_Store
+Thumbs.db
