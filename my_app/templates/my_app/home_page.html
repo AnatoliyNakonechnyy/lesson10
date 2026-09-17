@@ -15,14 +15,30 @@
     </ul>
 
     <h1>List of Books</h1>
+
+    <form method="get" action="" style="margin-bottom: 20px">
+      <input
+        type="text"
+        name="search"
+        placeholder="Search by title, author, or category..."
+        value="{{ search_query }}"
+        style="width: 300px; padding: 5px"
+      />
+      <button type="submit" style="padding: 5px 10px">Search</button>
+
+      {% if search_query %}
+      <a href="/" style="margin-left: 10px">Reset</a>
+      {% endif %}
+    </form>
+
     <ul>
       {% for book in books %}
       <li>
         <strong>{{ book.title }}</strong>
-        — {{ book.price }} usd — {{ book.category.name }}
+        — {{book.price}} usd — {{book.category.name}} (Author: {{book.author}})
       </li>
       {% empty %}
-      <li>No books available.</li>
+      <li>No books found matching your criteria.</li>
       {% endfor %}
     </ul>
   </body>
