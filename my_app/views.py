@@ -5,6 +5,8 @@ from .models import Book, Category
 
 
 def home_page(request):
+    """Renders the home page with a list of books and categories.
+    If a search query is provided, it filters the books based on the query."""
 
     search_query = request.GET.get("search", "")
 
