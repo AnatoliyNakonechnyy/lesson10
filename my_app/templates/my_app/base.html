@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Книжковий магазин{% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet" />
+  </head>
+  <body class="bg-light">
+    <!-- Навігаційна панель -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'store:home' %}">📚 BookStore</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'store:book_list' %}"
+                >Каталог книг</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'store:book_create' %}"
+                >+ Додати книгу</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Головний контейнер для дочірніх шаблонів -->
+    <div class="container">{% block content %} {% endblock %}</div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://jsdelivr.net"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+{% extends 'my_app/base.html' %} {% block title %}Видалити книгу{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5 text-center">
+    <div class="card bg-white p-5 rounded shadow-sm border-light-subtle">
+      <div class="text-danger mb-3">
+        <svg
+          xmlns="http://w3.org"
+          width="64"
+          height="64"
+          fill="currentColor"
+          class="bi bi-exclamation-triangle"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06c-.01.007-.017.01-.023.012a.2.2 0 0 1-.073.015H1.39a.2.2 0 0 1-.073-.015.2.2 0 0 1-.023-.012.2.2 0 0 1-.054-.06.2.2 0 0 1 .002-.183L8.084 2.073a.15.15 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"
+          />
+          <path
+            d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"
+          />
+        </svg>
+      </div>
+      <h2 class="text-danger fw-bold mb-3">Ви впевнені?</h2>
+      <p class="text-secondary mb-4">
+        Ви збираєтеся назавжди видалити книгу "<strong
+          >{{ object.title }}</strong
+        >". Цю дію не можна буде скасувати.
+      </p>
+
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger w-100 py-2 mb-2">
+          Так, видалити
+        </button>
+        <a
+          href="{% url 'store:book_detail' object.pk %}"
+          class="btn btn-light w-100 py-2"
+          >Ні, скасувати</a
+        >
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

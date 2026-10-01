@@ -1,180 +1,119 @@
-<!doctype html>
-<html lang="uk">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Список книг</title>
-    <style>
-      /* Базові скидання та шрифти */
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-          Arial, sans-serif;
-        background-color: #f4f6f8;
-        color: #333;
-        line-height: 1.5;
-        padding: 40px 20px;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      h1 {
-        text-align: center;
-        color: #2c3e50;
-        margin-bottom: 30px;
-        font-size: 2.5rem;
-      }
+<!-- prettier-ignore-start -->
+{% extends 'my_app/base.html' %} {% block title %}Каталог книг{% endblock %}
+{%block content%}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h2 text-dark m-0">📚 Каталог книг</h1>
+  <a href="{% url 'store:book_create' %}" class="btn btn-primary"
+    >+ Додати нову книгу</a
+  >
+</div>
 
-      /* Адаптивна сітка для карток на чистому CSS Grid */
-      .book-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 25px;
-      }
+{% if books %}
+<!-- Сітка карток на Bootstrap -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  {% for book in books %}
+  <div class="col">
+    <div class="card h-100 shadow-sm border-light-subtle">
+      <div class="card-body d-flex flex-column">
+        <span
+          class="badge bg-info-subtle text-info align-self-start mb-2 fs-7 px-2 py-1"
+          >📁 {{ book.category.name }}</span
+        >
+        <h5 class="card-title fw-bold text-dark">{{ book.title }}</h5>
+        <h6 class="card-subtitle mb-3 text-muted">
+          Автор:
+          <span class="text-secondary fw-semibold">{{ book.author }}</span>
+        </h6>
 
-      /* Стилі для кожної картки книги */
-      .book-card {
-        background: #ffffff;
-        border-radius: 8px;
-        padding: 24px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #e1e8ed;
-      }
-      .book-title {
-        font-size: 1.3rem;
-        color: #1a252f;
-        margin-bottom: 6px;
-        font-weight: 700;
-      }
-      .book-author {
-        font-size: 0.95rem;
-        color: #7f8c8d;
-        margin-bottom: 12px;
-      }
-      .book-author span {
-        color: #34495e;
-        font-weight: 600;
-      }
-      .book-category {
-        display: inline-block;
-        background-color: #e8f4fd;
-        color: #1da1f2;
-        font-size: 0.85rem;
-        padding: 4px 10px;
-        border-radius: 4px;
-        font-weight: 600;
-        margin-bottom: 16px;
-        align-self: flex-start;
-      }
-      .book-description {
-        font-size: 0.95rem;
-        color: #555;
-        flex-grow: 1; /* Штовхає підвал картки донизу */
-        margin-bottom: 20px;
-      }
-      .book-description em {
-        color: #95a5a6;
-      }
+        <p class="card-text text-secondary flex-grow-1">
+          {% if book.description %} {{ book.description|truncatewords:20 }}
+          {%else%}
+          <em class="text-muted">Опис відсутній.</em>
+          {% endif %}
+        </p>
 
-      /* Підвал картки: ціна та статус */
-      .book-footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 15px;
-        border-top: 1px solid #eeeeee;
-      }
-      .book-price {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #27ae60;
-      }
-      .status-badge {
-        font-size: 0.85rem;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-weight: 600;
-      }
-      .status-in-stock {
-        background-color: #e8f8f5;
-        color: #2ecc71;
-        border: 1px solid #d1f2eb;
-      }
-      .status-out-of-stock {
-        background-color: #fdebd0;
-        color: #e67e22;
-        border: 1px solid #f9e79f;
-      }
+        <div
+          class="border-top pt-3 mt-3 d-flex justify-content-between align-items-center"
+        >
+          <span class="fs-5 fw-bold text-success">{{ book.price }} грн</span>
 
-      /* Сповіщення про порожній список */
-      .empty-alert {
-        background-color: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffeeba;
-        padding: 30px;
-        border-radius: 8px;
-        text-align: center;
-        max-width: 600px;
-        margin: 40px auto 0;
-      }
-      .empty-alert h4 {
-        font-size: 1.4rem;
-        margin-bottom: 8px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>📚 Каталог книг</h1>
-
-      <!-- Перевірка, чи є книги -->
-      {% if books %}
-      <div class="book-grid">
-        {% for book in books %}
-        <div class="book-card">
-          <h2 class="book-title">{{ book.title }}</h2>
-          <p class="book-author">Автор: <span>{{ book.author }}</span></p>
-
-          <span class="book-category">📁 {{ book.category.name }}</span>
-
-          <p class="book-description">
-            {% if book.description %} {{ book.description|truncatewords:20 }} {%
-            else %}
-            <em>Опис відсутній.</em>
-            {% endif %}
-          </p>
-
-          <div class="book-footer">
-            <span class="book-price">{{ book.price }} грн</span>
-
-            {% if book.stock > 0 %}
-            <span class="status-badge status-in-stock"
-              >В наявності ({{ book.stock }})</span
-            >
-            {% else %}
-            <span class="status-badge status-out-of-stock"
-              >Немає в наявності</span
-            >
-            {% endif %}
-          </div>
+          {% if book.stock > 0 %}
+          <span class="badge bg-success-subtle text-success px-2 py-1"
+            >В наявності ({{ book.stock }})</span
+          >
+          {% else %}
+          <span class="badge bg-warning-subtle text-warning px-2 py-1"
+            >Немає в наявності</span
+          >
+          {% endif %}
         </div>
-        {% endfor %}
       </div>
-      {% else %}
-      <!-- Якщо книг немає в базі -->
-      <div class="empty-alert">
-        <h4>Книг не знайдено</h4>
-        <p>Схоже, в базі даних ще немає жодного запису про книги.</p>
+      <!-- Кнопки керування для CBV (Detail, Update, Delete) -->
+      <div
+        class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2 pb-3"
+      >
+        <a
+          href="{% url 'store:book_detail' book.pk %}"
+          class="btn btn-sm btn-outline-secondary"
+          >Детальніше</a
+        >
+        <a
+          href="{% url 'store:book_update' book.pk %}"
+          class="btn btn-sm btn-outline-warning"
+          >Редагувати</a
+        >
+        <a
+          href="{% url 'store:book_delete' book.pk %}"
+          class="btn btn-sm btn-outline-danger"
+          >Видалити</a
+        >
       </div>
-      {% endif %}
     </div>
-  </body>
-</html>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Реалізація Пагінації з Bootstrap 5 -->
+{% if is_paginated %}
+<nav class="mt-5">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}"
+        >Назад</a
+      >
+    </li>
+    {% endif %} {% for num in page_obj.paginator.page_range %}
+    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+      <a
+        class="page-link"
+        href="?page={{ num }}{% if search_query %}&q={{ search_query }}{% endif %}"
+        >{{ num }}</a
+      >
+    </li>
+    {% endfor %} {% if page_obj.has_next %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}"
+        >Вперед</a
+      >
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %} {% else %}
+<!-- Якщо книг немає -->
+<div
+  class="alert alert-warning text-center mx-auto my-5 p-4"
+  style="max-width: 600px"
+>
+  <h4 class="alert-heading fw-bold">Книг не знайдено</h4>
+  <p class="mb-0">
+    Схоже, в базі даних ще немає жодного запису або пошук не дав результатів.
+  </p>
+</div>
+{% endif %} {% endblock %}
+<!-- prettier-ignore-end -->

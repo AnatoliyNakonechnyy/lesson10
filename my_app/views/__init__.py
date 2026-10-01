@@ -1,2 +1,8 @@
-from .book_list import book_list as book_list
-from .home_page import home_page as home_page
+from .book_list import (
+    BookCreateView as BookCreateView,
+    BookDeleteView as BookDeleteView,
+    BookDetailView as BookDetailView,
+    BookListView as BookListView,
+    BookUpdateView as BookUpdateView,
+)
+from .home_page import HomePageView as HomePageView
