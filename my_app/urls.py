@@ -12,7 +12,6 @@ from .views import (
 app_name = "store"
 
 urlpatterns = [
-    # Зверніть увагу: для класів обов'язково викликаємо .as_view()
     path("", HomePageView.as_view(), name="home"),
     path("books/", BookListView.as_view(), name="book_list"),
     path("books/<int:pk>/", BookDetailView.as_view(), name="book_detail"),
