@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Список книг</title>
+    <style>
+      /* Базові скидання та шрифти */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background-color: #f4f6f8;
+        color: #333;
+        line-height: 1.5;
+        padding: 40px 20px;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+      }
+
+      /* Адаптивна сітка для карток на чистому CSS Grid */
+      .book-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+      }
+
+      /* Стилі для кожної картки книги */
+      .book-card {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e1e8ed;
+      }
+      .book-title {
+        font-size: 1.3rem;
+        color: #1a252f;
+        margin-bottom: 6px;
+        font-weight: 700;
+      }
+      .book-author {
+        font-size: 0.95rem;
+        color: #7f8c8d;
+        margin-bottom: 12px;
+      }
+      .book-author span {
+        color: #34495e;
+        font-weight: 600;
+      }
+      .book-category {
+        display: inline-block;
+        background-color: #e8f4fd;
+        color: #1da1f2;
+        font-size: 0.85rem;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        align-self: flex-start;
+      }
+      .book-description {
+        font-size: 0.95rem;
+        color: #555;
+        flex-grow: 1; /* Штовхає підвал картки донизу */
+        margin-bottom: 20px;
+      }
+      .book-description em {
+        color: #95a5a6;
+      }
+
+      /* Підвал картки: ціна та статус */
+      .book-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 15px;
+        border-top: 1px solid #eeeeee;
+      }
+      .book-price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #27ae60;
+      }
+      .status-badge {
+        font-size: 0.85rem;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+      }
+      .status-in-stock {
+        background-color: #e8f8f5;
+        color: #2ecc71;
+        border: 1px solid #d1f2eb;
+      }
+      .status-out-of-stock {
+        background-color: #fdebd0;
+        color: #e67e22;
+        border: 1px solid #f9e79f;
+      }
+
+      /* Сповіщення про порожній список */
+      .empty-alert {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+        padding: 30px;
+        border-radius: 8px;
+        text-align: center;
+        max-width: 600px;
+        margin: 40px auto 0;
+      }
+      .empty-alert h4 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📚 Каталог книг</h1>
+
+      <!-- Перевірка, чи є книги -->
+      {% if books %}
+      <div class="book-grid">
+        {% for book in books %}
+        <div class="book-card">
+          <h2 class="book-title">{{ book.title }}</h2>
+          <p class="book-author">Автор: <span>{{ book.author }}</span></p>
+
+          <span class="book-category">📁 {{ book.category.name }}</span>
+
+          <p class="book-description">
+            {% if book.description %} {{ book.description|truncatewords:20 }} {%
+            else %}
+            <em>Опис відсутній.</em>
+            {% endif %}
+          </p>
+
+          <div class="book-footer">
+            <span class="book-price">{{ book.price }} грн</span>
+
+            {% if book.stock > 0 %}
+            <span class="status-badge status-in-stock"
+              >В наявності ({{ book.stock }})</span
+            >
+            {% else %}
+            <span class="status-badge status-out-of-stock"
+              >Немає в наявності</span
+            >
+            {% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <!-- Якщо книг немає в базі -->
+      <div class="empty-alert">
+        <h4>Книг не знайдено</h4>
+        <p>Схоже, в базі даних ще немає жодного запису про книги.</p>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>

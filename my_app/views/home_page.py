@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render
 
-from .models import Book, Category
+from ..models import Book, Category
 
 
 def home_page(request):
