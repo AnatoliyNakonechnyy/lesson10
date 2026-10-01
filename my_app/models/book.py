@@ -3,15 +3,10 @@ from django.db import models
 
 class Book(models.Model):
     title = models.CharField(max_length=255, verbose_name="Name of the book")
-
     author = models.CharField(max_length=255, verbose_name="Author")
-
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Price")
-
     description = models.TextField(blank=True, verbose_name="Description")
-
     stock = models.PositiveIntegerField(default=0, verbose_name="Stock")
-
     category = models.ForeignKey(
         "Category",
         on_delete=models.CASCADE,
