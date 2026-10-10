@@ -8,7 +8,38 @@
 {% block content %}
 <div class="p-5 mb-4 bg-white rounded-3 shadow-sm text-center border">
   <h1 class="display-5 fw-bold mb-3">Вітаємо у BookStore! 📚</h1>
-  <p class="fs-5 text-secondary">Сервер працює коректно, шаблони підключені.</p>
+
+  <div class="mb-4">
+    {% if user.is_authenticated %}
+    <p class="fs-5 text-success">
+      Ви увійшли як: <strong>{{ user.username }}</strong>
+    </p>
+    {% if user.phone_number %}
+    <p class="small text-muted">Ваш телефон: {{ user.phone_number }}</p>
+    {% endif %}
+    <!-- Змінено на store:logout -->
+    <form action="{% url 'store:logout' %}" method="post" class="d-inline">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-danger btn-sm">
+        Вийти з аккаунта
+      </button>
+    </form>
+    {% else %}
+    <p class="fs-5 text-secondary">
+      Сервер працює коректно, шаблони підключені.
+    </p>
+    <div class="d-flex justify-content-center gap-2">
+      <!-- Змінено на store:login та store:register -->
+      <a href="{% url 'store:login' %}" class="btn btn-outline-primary"
+        >Увійти</a
+      >
+      <a href="{% url 'store:register' %}" class="btn btn-outline-secondary"
+        >Реєстрація</a
+      >
+    </div>
+    {% endif %}
+  </div>
+
   <a href="{% url 'store:book_list' %}" class="btn btn-primary btn-lg mt-3"
     >Перейти до каталогу книг</a
   >

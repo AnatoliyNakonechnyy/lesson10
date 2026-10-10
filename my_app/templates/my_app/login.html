@@ -1,0 +1,65 @@
+{% extends 'my_app/base.html' %} {% block title %}Вхід у систему{% endblock %}
+{% block content %}
+<div class="row justify-content-center mt-5">
+  <div class="col-md-4">
+    <div class="card p-4 border shadow-sm bg-white rounded-3">
+      <h3 class="text-center fw-bold text-dark mb-4">Вхід у BookStore 📚</h3>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <!-- Якщо логін або пароль неправильні -->
+        {% if form.errors %}
+        <div class="alert alert-danger p-2 small text-center">
+          Неправильний логін або пароль.
+        </div>
+        {% endif %}
+
+        <div class="mb-3">
+          <label
+            for="id_username"
+            class="form-label small fw-semibold text-secondary"
+            >Ім'я користувача</label
+          >
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            id="id_username"
+            required
+            placeholder="Ваш логін"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label
+            for="id_password"
+            class="form-label small fw-semibold text-secondary"
+            >Пароль</label
+          >
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            id="id_password"
+            required
+            placeholder="Ваш пароль"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 fw-bold mt-2">
+          Увійти
+        </button>
+      </form>
+
+      <div class="text-center mt-3 small">
+        <a
+          href="{% url 'store:register' %}"
+          class="text-secondary text-decoration-none"
+          >Ще немає аккаунта? Зареєструватися</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

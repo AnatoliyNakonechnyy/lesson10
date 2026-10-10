@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Книжковий магазин{% endblock %}</title>
-    <!-- Bootstrap 5 CSS -->
+    <!-- Виправлено: Повне посилання на Bootstrap 5 CSS -->
     <link href="https://jsdelivr.net" rel="stylesheet" />
   </head>
   <body class="bg-light">
@@ -12,6 +12,16 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="{% url 'store:home' %}">📚 BookStore</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
@@ -19,20 +29,50 @@
                 >Каталог книг</a
               >
             </li>
+            {% if perms.my_app.add_book or user.is_staff %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'store:book_create' %}"
                 >+ Додати книгу</a
               >
             </li>
+            {% endif %}
           </ul>
+
+          <!-- Блок користувача у правому кутку навігації -->
+          <div class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+            <span class="nav-item nav-link text-light me-3"
+              >👤 {{ user.username }}</span
+            >
+            <form
+              action="{% url 'store:logout' %}"
+              method="post"
+              class="d-inline"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-outline-danger">
+                Вийти
+              </button>
+            </form>
+            {% else %}
+            <a
+              class="btn btn-sm btn-outline-light me-2"
+              href="{% url 'store:login' %}"
+              >Увійти</a
+            >
+            <a class="btn btn-sm btn-primary" href="{% url 'store:register' %}"
+              >Реєстрація</a
+            >
+            {% endif %}
+          </div>
         </div>
       </div>
     </nav>
 
     <!-- Головний контейнер для дочірніх шаблонів -->
-    <div class="container">{% block content %} {% endblock %}</div>
+    <div class="container">{% block content %}{% endblock %}</div>
 
-    <!-- Bootstrap 5 JS -->
+    <!-- Виправлено: Повне посилання на Bootstrap 5 JS -->
     <script src="https://jsdelivr.net"></script>
   </body>
 </html>

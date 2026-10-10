@@ -1,13 +1,15 @@
 from django.urls import path
-
-from .views import (
+from .views.book_list import (
     BookCreateView,
     BookDeleteView,
     BookDetailView,
     BookListView,
     BookUpdateView,
-    HomePageView,
+    RegisterView,
+    CustomLoginView,
+    CustomLogoutView,
 )
+from .views.home_page import HomePageView
 
 app_name = "store"
 
@@ -18,4 +20,7 @@ urlpatterns = [
     path("books/add/", BookCreateView.as_view(), name="book_create"),
     path("books/<int:pk>/edit/", BookUpdateView.as_view(), name="book_update"),
     path("books/<int:pk>/delete/", BookDeleteView.as_view(), name="book_delete"),
+    path("auth/register/", RegisterView.as_view(), name="register"),
+    path("auth/login/", CustomLoginView.as_view(), name="login"),
+    path("auth/logout/", CustomLogoutView.as_view(), name="logout"),
 ]

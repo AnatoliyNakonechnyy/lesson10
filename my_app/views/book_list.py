@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -8,7 +10,28 @@ from django.views.generic import (
     UpdateView,
 )
 
+from my_app.forms import CustomUserCreationForm
 from my_app.models import Book
+
+
+class RegisterView(CreateView):
+    """Class for user registration."""
+
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy("store:login")
+    template_name = "my_app/register.html"
+
+
+class CustomLoginView(LoginView):
+    """Class for user login."""
+
+    template_name = "my_app/login.html"
+
+
+class CustomLogoutView(LogoutView):
+    """Class for user logout."""
+
+    next_page = reverse_lazy("store:login")
 
 
 class BookListView(ListView):
@@ -38,21 +61,27 @@ class BookDetailView(DetailView):
     context_object_name = "book"
 
 
-class BookCreateView(CreateView):
+class BookCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Book
     fields = ("title", "author", "price", "description", "stock", "category")
     template_name = "my_app/book_form.html"
     success_url = reverse_lazy("store:book_list")
+    login_url = "store:login"
+    permission_required = "my_app.add_book"  # Тепер захищено на рівні прав
 
 
-class BookUpdateView(UpdateView):
+class BookUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Book
     fields = ("title", "author", "price", "description", "stock", "category")
     template_name = "my_app/book_form.html"
     success_url = reverse_lazy("store:book_list")
+    login_url = "store:login"
+    permission_required = "my_app.change_book"
 
 
-class BookDeleteView(DeleteView):
+class BookDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Book
     template_name = "my_app/book_confirm_delete.html"
     success_url = reverse_lazy("store:book_list")
+    login_url = "store:login"
+    permission_required = "my_app.delete_book"
