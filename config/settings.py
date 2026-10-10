@@ -151,9 +151,7 @@ LOGGING = {
         "file": {
             "level": "INFO",
             "class": "logging.FileHandler",
-            "filename": os.path.join(
-                BASE_DIR, "app_info.log"
-            ),  # Файл створиться в корені проєкту
+            "filename": os.path.join(BASE_DIR, "app_info.log"),
             "formatter": "standard",
             "encoding": "utf-8",
         },
