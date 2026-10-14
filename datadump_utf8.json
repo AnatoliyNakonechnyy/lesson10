@@ -1,0 +1,318 @@
+﻿[
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Menagers",
+        "permissions": [
+            [
+                "view_book",
+                "my_app",
+                "book"
+            ],
+            [
+                "view_category",
+                "my_app",
+                "category"
+            ]
+        ]
+    }
+},
+{
+    "model": "auth.group",
+    "fields": {
+        "name": "Admins",
+        "permissions": [
+            [
+                "add_logentry",
+                "admin",
+                "logentry"
+            ],
+            [
+                "change_logentry",
+                "admin",
+                "logentry"
+            ],
+            [
+                "delete_logentry",
+                "admin",
+                "logentry"
+            ],
+            [
+                "view_logentry",
+                "admin",
+                "logentry"
+            ]
+        ]
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "xmesc38pdwq71ix337moy4zte4ofrcsq",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQAP9lz4bAAmXbo3e_gSwvqRqalPZk_HfTpAe9zkzmDZ73rfq959XPCSZQcPllgeMzt0OkB7f7IuLStnUO4kjEabu4LSm_rmf7N6jcK0yAyrFFPVIxOspCJI1hKykRSlQUiQuFGJRR2mTpBg5odZIjD9alQgifL7OwNtk:1xFTYN:S22Q-5as8Z_MzuJIUb1leIfhMh2DqNRyVVtBf1YUsEc",
+        "expire_date": "2026-10-24T09:39:43.400Z"
+    }
+},
+{
+    "model": "my_app.book",
+    "pk": 2,
+    "fields": {
+        "title": "Book2",
+        "author": "Author5",
+        "price": "30.00",
+        "description": "Test222",
+        "stock": 35,
+        "category": 1
+    }
+},
+{
+    "model": "my_app.book",
+    "pk": 3,
+    "fields": {
+        "title": "book5",
+        "author": "Author2",
+        "price": "6.00",
+        "description": "Descr4",
+        "stock": 4,
+        "category": 1
+    }
+},
+{
+    "model": "my_app.category",
+    "pk": 1,
+    "fields": {
+        "name": "Poems",
+        "slug": "poems"
+    }
+},
+{
+    "model": "my_app.category",
+    "pk": 2,
+    "fields": {
+        "name": "Science",
+        "slug": "science"
+    }
+},
+{
+    "model": "my_app.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1500000$ek78Pwm0qx2EvshaBkFQKt$YFy4UwGNnbJG6UbunBNIfJiEKRNEuoz68cyl3GseUQs=",
+        "last_login": "2026-10-10T09:39:43.396Z",
+        "is_superuser": true,
+        "username": "anatoliy.nakonechnyy@gmail.com",
+        "first_name": "",
+        "last_name": "",
+        "email": "anatoliy.nakonechnyy@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-10-08T22:22:08.366Z",
+        "bio": "",
+        "phone_number": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "my_app.customuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1500000$1wOst35z0TOWWm57r7UJkK$06LDZTcG7Gw9HSoYNp3bM3LIw/o8KZwDrC9K1MSrU2Q=",
+        "last_login": "2026-10-10T09:25:17.578Z",
+        "is_superuser": false,
+        "username": "test@gmail.com",
+        "first_name": "",
+        "last_name": "",
+        "email": "test@gmail.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-10-10T09:09:30Z",
+        "bio": "",
+        "phone_number": "3812541544",
+        "groups": [
+            [
+                "Menagers"
+            ]
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2026-10-09T16:01:30.876Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "my_app",
+            "category"
+        ],
+        "object_id": "1",
+        "object_repr": "Poems",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2026-10-09T16:01:33.740Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "my_app",
+            "book"
+        ],
+        "object_id": "1",
+        "object_repr": "Book1 by Author1",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2026-10-09T16:02:08.554Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "my_app",
+            "category"
+        ],
+        "object_id": "2",
+        "object_repr": "Science",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2026-10-09T16:02:10.454Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "my_app",
+            "book"
+        ],
+        "object_id": "2",
+        "object_repr": "Book2 by Author5",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2026-10-09T16:03:16.623Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "object_id": "1",
+        "object_repr": "Menagers",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2026-10-09T16:03:48.299Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "object_id": "2",
+        "object_repr": "Admins",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2026-10-09T16:04:08.321Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "object_id": "1",
+        "object_repr": "Menagers",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2026-10-10T09:22:10.132Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "auth",
+            "group"
+        ],
+        "object_id": "1",
+        "object_repr": "Menagers",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Permissions\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2026-10-10T09:23:32.684Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "my_app",
+            "customuser"
+        ],
+        "object_id": "2",
+        "object_repr": "test@gmail.com",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Groups\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2026-10-10T09:23:50.209Z",
+        "user": [
+            "anatoliy.nakonechnyy@gmail.com"
+        ],
+        "content_type": [
+            "my_app",
+            "customuser"
+        ],
+        "object_id": "2",
+        "object_repr": "test@gmail.com",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+}
+]
