@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Книжковий магазин{% endblock %}</title>
-    <!-- Виправлено: Повне посилання на Bootstrap 5 CSS -->
+    <!-- Виправлено: Валідні CDN посилання на Bootstrap 5 CSS -->
     <link href="https://jsdelivr.net" rel="stylesheet" />
   </head>
   <body class="bg-light">
@@ -38,8 +38,27 @@
             {% endif %}
           </ul>
 
-          <!-- Блок користувача у правому кутку навігації -->
-          <div class="navbar-nav ms-auto">
+          <!-- Блок кошика та користувача у правому кутку навігації -->
+          <div class="navbar-nav ms-auto align-items-center">
+            <!-- Динамічний віджет кошика -->
+            <div class="nav-item me-3">
+              <a
+                class="btn btn-sm btn-outline-warning position-relative"
+                href="{% url 'store:cart_detail' %}"
+              >
+                🛒 Кошик {% if cart|length > 0 %}
+                <span class="badge bg-danger rounded-pill"
+                  >{{ cart|length }}</span
+                >
+                <span class="ms-1 text-light"
+                  >({{ cart.get_total_price }} грн)</span
+                >
+                {% else %}
+                <span class="text-muted ms-1">(порожній)</span>
+                {% endif %}
+              </a>
+            </div>
+
             {% if user.is_authenticated %}
             <span class="nav-item nav-link text-light me-3"
               >👤 {{ user.username }}</span
@@ -68,11 +87,25 @@
         </div>
       </div>
     </nav>
-
-    <!-- Головний контейнер для дочірніх шаблонів -->
+    <div class="container mt-3">
+      {% if messages %} {% for message in messages %}
+      <!-- Автоматично підставляємо клас danger для помилок або success для успіху -->
+      <div
+        class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show shadow-sm fw-medium"
+        role="alert"
+      >
+        {% if message.tags == 'error' %}⚠️{% else %}✨{% endif %} {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
     <div class="container">{% block content %}{% endblock %}</div>
 
-    <!-- Виправлено: Повне посилання на Bootstrap 5 JS -->
     <script src="https://jsdelivr.net"></script>
   </body>
 </html>

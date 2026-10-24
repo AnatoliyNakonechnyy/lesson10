@@ -8,4 +8,14 @@ from .book_list import (
     CustomLogoutView as CustomLogoutView,
     RegisterView as RegisterView,
 )
+from .cart import (
+    cart_add as cart_add,
+    cart_detail as cart_detail,
+    cart_remove as cart_remove,
+)
 from .home_page import HomePageView as HomePageView
+from .order import (
+    order_create as order_create,
+    payment_success as payment_success,
+    payment_cancel as payment_cancel,
+)

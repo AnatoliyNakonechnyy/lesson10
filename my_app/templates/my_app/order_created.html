@@ -1,0 +1,50 @@
+{% extends "my_app/base.html" %} {% block title %}Order Successful —
+BookStore{%endblock%} {% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center bg-white p-5 rounded shadow-sm">
+      <div class="display-1 text-success mb-4">🎉</div>
+      <h1 class="fw-bold text-dark mb-3">Thank you for your order!</h1>
+      <p class="fs-5 text-muted mb-4">
+        Your order has been placed successfully. We've already started preparing
+        it for delivery.
+      </p>
+
+      <div
+        class="card bg-light border-0 mb-5 text-start mx-auto"
+        style="max-width: 450px"
+      >
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3 border-bottom pb-2">Order Details:</h5>
+          <p class="mb-2"><strong>Order ID:</strong> #{{ order.id }}</p>
+          <p class="mb-2">
+            <strong>Customer:</strong> {{ order.first_name }}
+            {{order.last_name}}
+          </p>
+          <p class="mb-2">
+            <strong>Status:</strong>
+            <span class="badge bg-warning text-dark"
+              >{{ order.get_status_display }}</span
+            >
+          </p>
+          <p class="mb-0">
+            <strong>Total cost:</strong>
+            <span class="text-success fw-bold"
+              >{{ order.get_total_cost }} грн</span
+            >
+          </p>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a
+          href="{% url 'store:book_list' %}"
+          class="btn btn-primary btn-lg px-4 shadow-sm"
+        >
+          Continue Shopping
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

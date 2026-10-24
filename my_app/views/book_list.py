@@ -9,7 +9,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-
+from .cart import CartAddBookForm
 from my_app.forms import CustomUserCreationForm
 from my_app.models import Book
 
@@ -51,7 +51,7 @@ class BookListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["search_query"] = self.request.GET.get("q", "")
+        context["cart_product_form"] = CartAddBookForm()
         return context
 
 

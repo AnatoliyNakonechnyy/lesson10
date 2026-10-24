@@ -1,0 +1,24 @@
+{
+  "_meta": {
+    "template_version": 0
+  },
+  "fixtures": [
+    {
+      "name": "payment_intent",
+      "path": "/v1/payment_intents",
+      "method": "post",
+      "params": {
+        "amount": 2000,
+        "currency": "usd",
+        "automatic_payment_methods": {
+          "enabled": true
+        }
+      }
+    },
+    {
+      "name": "payment_intent_confirm",
+      "path": "/v1/payment_intents/${payment_intent:id}/confirm",
+      "method": "post"
+    }
+  ]
+}

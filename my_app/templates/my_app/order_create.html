@@ -1,0 +1,135 @@
+{% extends "my_app/base.html" %} {% block title %}Checkout —
+BookStore{%endblock%} {% block content %}
+<div class="container py-4">
+  <h1 class="mb-4">📋 Checkout</h1>
+
+  <div class="row">
+    <!-- Форма контактних даних -->
+    <div class="col-lg-7 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white py-3">
+          <h5 class="mb-0">Shipping & Customer Information</h5>
+        </div>
+        <div class="card-body p-4">
+          <form
+            method="post"
+            action="{% url 'store:order_create' %}"
+            novalidate
+          >
+            {% csrf_token %}
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-bold">First Name</label>
+                {{ form.first_name }} {% if form.first_name.errors %}
+                <div class="text-danger small mt-1">
+                  {{ form.first_name.errors.0 }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Last Name</label>
+                {{ form.last_name }} {% if form.last_name.errors %}
+                <div class="text-danger small mt-1">
+                  {{ form.last_name.errors.0 }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Email Address</label>
+                {{ form.email }} {% if form.email.errors %}
+                <div class="text-danger small mt-1">
+                  {{ form.email.errors.0 }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Phone Number</label>
+                {{ form.phone }} {% if form.phone.errors %}
+                <div class="text-danger small mt-1">
+                  {{ form.phone.errors.0 }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">City</label>
+                {{ form.city }} {% if form.city.errors %}
+                <div class="text-danger small mt-1">
+                  {{ form.city.errors.0 }}
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Shipping Address</label>
+                {{ form.address }} {% if form.address.errors %}
+                <div class="text-danger small mt-1">
+                  {{ form.address.errors.0 }}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-success btn-lg shadow-sm fw-bold"
+              >
+                Confirm Order 🚀
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Підсумок замовлення (Sidebar) -->
+    <div class="col-lg-5">
+      <div class="card shadow-sm sticky-top" style="top: 20px">
+        <div class="card-header bg-secondary text-white py-3">
+          <h5 class="mb-0">Your Order Summary</h5>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush mb-0">
+            {% for item in cart %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center py-3"
+            >
+              <div>
+                <h6 class="mb-0 fw-bold">{{ item.book.title }}</h6>
+                <small class="text-muted"
+                  >{{ item.quantity }}x at {{ item.price }} грн</small
+                >
+              </div>
+              <span class="fw-bold text-dark">{{ item.total_price }} грн</span>
+            </li>
+            {% endfor %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center py-3 bg-light"
+            >
+              <span class="fs-5 fw-bold text-secondary">Total price:</span>
+              <span class="fs-4 fw-bold text-success"
+                >{{ cart.get_total_price }} грн</span
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer bg-white border-top-0 py-3 text-center">
+          <a
+            href="{% url 'store:cart_detail' %}"
+            class="btn btn-sm btn-outline-secondary"
+          >
+            ← Back to Cart Edit
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
