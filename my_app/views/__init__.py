@@ -1,8 +1,8 @@
 from .book_list import (
     BookCreateView as BookCreateView,
-    BookDeleteView as BookDeleteView,
-    BookDetailView as BookDetailView,
-    BookListView as BookListView,
+    AsyncBookListView as AsyncBookListView,
+    AsyncBookDetailView as AsyncBookDetailView,
+    AsyncBookDeleteView as AsyncBookDeleteView,
     BookUpdateView as BookUpdateView,
     CustomLoginView as CustomLoginView,
     CustomLogoutView as CustomLogoutView,

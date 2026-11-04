@@ -13,7 +13,8 @@ FROM python:3.12-slim AS runner
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y libpq-dev && rm -rf /var/lib/apt/lists/*
+# Додано gettext сюди, щоб команда makemessages працювала всередині запущеного контейнера
+RUN apt-get update && apt-get install -y libpq-dev gettext && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /root/.local /root/.local
 COPY . .

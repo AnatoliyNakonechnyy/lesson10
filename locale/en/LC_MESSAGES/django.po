@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-04 17:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: config/settings.py:40
+msgid "Ukrainian"
+msgstr "Ukrainian"
+
+#: config/settings.py:41
+msgid "English"
+msgstr "English"
+
+#: my_app/models/book.py:6
+msgid "Name of the book"
+msgstr "Title"
+
+#: my_app/models/book.py:7
+msgid "Author"
+msgstr "Author"
+
+#: my_app/models/book.py:9
+msgid "Price"
+msgstr "Price"
+
+#: my_app/models/book.py:11
+msgid "Description"
+msgstr "Description"
+
+#: my_app/models/book.py:12
+msgid "Stock"
+msgstr "Stock"
+
+#: my_app/models/book.py:17
+msgid "Category"
+msgstr "Category"
+
+#: my_app/models/book.py:24
+msgid "Book"
+msgstr "Book"
+
+#: my_app/models/book.py:25
+msgid "Books"
+msgstr "Books"
+
+#: my_app/templates/my_app/base.html:8
+msgid "Книжковий магазин"
+msgstr "Book Store"
+
+#: my_app/templates/my_app/base.html:31
+msgid "Каталог книг"
+msgstr "Book Catalog"
+
+#: my_app/templates/my_app/base.html:37
+msgid "Додати книгу"
+msgstr "Add Book"
+
+#: my_app/templates/my_app/base.html:76
+msgid "Кошик"
+msgstr "Cart"
+
+#: my_app/templates/my_app/base.html:81
+msgid "грн"
+msgstr "UAH"
+
+#: my_app/templates/my_app/base.html:85
+msgid "порожній"
+msgstr "empty"
+
+#: my_app/templates/my_app/base.html:102
+msgid "Вийти"
+msgstr "Logout"
+
+#: my_app/templates/my_app/base.html:109
+#: my_app/templates/my_app/home_page.html:32
+msgid "Увійти"
+msgstr "Login"
+
+#: my_app/templates/my_app/base.html:112
+#: my_app/templates/my_app/home_page.html:33
+msgid "Реєстрація"
+msgstr "Register"
+
+#: my_app/templates/my_app/home_page.html:5
+msgid "Головна"
+msgstr "Home"
+
+#: my_app/templates/my_app/home_page.html:10
+msgid "Вітаємо у BookStore!"
+msgstr "Welcome to BookStore!"
+
+#: my_app/templates/my_app/home_page.html:15
+msgid "Ви увійшли як"
+msgstr "You are logged in as"
+
+#: my_app/templates/my_app/home_page.html:18
+msgid "Ваш телефон"
+msgstr "Your phone"
+
+#: my_app/templates/my_app/home_page.html:24
+msgid "Вийти з аккаунта"
+msgstr "Log out of your account"
+
+#: my_app/templates/my_app/home_page.html:29
+msgid "Сервер працює коректно, шаблони підключені."
+msgstr "The server is working correctly, templates are connected."
+
+#: my_app/templates/my_app/home_page.html:39
+msgid "Перейти до каталогу книг"
+msgstr "Go to book catalog"
