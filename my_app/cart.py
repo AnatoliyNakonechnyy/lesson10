@@ -48,8 +48,10 @@ class Cart:
 
     def clear(self) -> None:
         """Remove the cart from session."""
-        del self.session[settings.CART_SESSION_ID]
-        self.save()
+        if settings.CART_SESSION_ID in self.session:
+            del self.session[settings.CART_SESSION_ID]
+            self.save()
+        self.cart = {}
 
     def save(self) -> None:
         """Mark the session as modified to ensure it gets saved."""
@@ -58,10 +60,9 @@ class Cart:
     def __iter__(self):
         """Iterate over the items in the cart and get the books from the database."""
         book_ids = self.cart.keys()
-        # Fetch book instances from DB
         books = Book.objects.filter(id__in=book_ids)
 
-        cart_copy = self.cart.copy()
+        cart_copy = {k: v.copy() for k, v in self.cart.items()}
         for book in books:
             cart_copy[str(book.id)]["book"] = book
 
